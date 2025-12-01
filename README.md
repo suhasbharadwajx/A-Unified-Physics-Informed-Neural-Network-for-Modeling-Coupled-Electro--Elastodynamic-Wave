@@ -101,7 +101,7 @@ The PINN achieves:
 Time-dependent error growth and amplitude loss at late times are observed, reflecting intrinsic PINN limitations on long-horizon coupled hyperbolic problems.
 
 ## Repository Structure
-
+.
 ├── pinn_piezo.py # Core PINN implementation
 ├── train.py # Training script
 ├── evaluate.py # Evaluation and visualization
