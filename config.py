@@ -1,6 +1,4 @@
-"""
-Configuration file for 1D Piezoelectric PINN
-"""
+"""Configuration file for 1D Piezoelectric PINNs"""
 
 # Material parameters
 MATERIAL_PARAMS = {
