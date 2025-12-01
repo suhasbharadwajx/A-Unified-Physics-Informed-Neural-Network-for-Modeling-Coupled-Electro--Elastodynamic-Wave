@@ -21,14 +21,14 @@ Physics-informed neural networks embed partial differential equations directly i
 
 The 1D linear pieelectric system in stress-charge form consists of:
 
-1. **Elastodynamics**: \(\rho u_{tt} = \sigma_x\)
-2. **Stress relation**: \(\sigma = c_E u_x - e_{33} \varphi_x\)
-3. **Electric displacement**: \(D = e_{33} u_x + \varepsilon_S \varphi_x\)
-4. **Electrical equation**: \(\varepsilon_0 \varphi_{tt} = -D_x\)
+1. **Elastodynamics**: $\(\rho u_{tt} = \sigma_x\)$
+2. **Stress relation**: $\(\sigma = c_E u_x - e_{33} \varphi_x\)$
+3. **Electric displacement**: $\(D = e_{33} u_x + \varepsilon_S \varphi_x\)$
+4. **Electrical equation**: $\(\varepsilon_0 \varphi_{tt} = -D_x\)$
 
-With boundary conditions: \(u(0,t) = u(1,t) = 0\), \(\varphi(0,t) = \varphi(1,t) = 0\)
+With boundary conditions: $\(u(0,t) = u(1,t) = 0\), \(\varphi(0,t) = \varphi(1,t) = 0\)$
 
-And initial conditions: \(u(x,0) = \sin(\pi x)\), \(\varphi(x,0) = 0.5\sin(\pi x)\)
+And initial conditions: $\(u(x,0) = \sin(\pi x)\), \(\varphi(x,0) = 0.5\sin(\pi x)\)$
 
 The exact standing-wave solution is known analytically, enabling rigorous validation.
 
