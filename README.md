@@ -1,9 +1,9 @@
 # A-Unified-Physics-Informed-Neural-Network-for-Modeling-Coupled-Electro-Elastodynamic-Wave
-Source code to the paper titled "A Unified Physics-Informed Neural Network for Modeling Coupled Electro- and Elastodynamic Wave Propagation Using 1D Piezoelectricity" by Suhas Suresh Bharadwaj and Reuben Thomas Thovelil.
+Source code to the paper titled "A Unified Physics-Informed Neural Network for Modeling Coupled Electro‑ and Elastodynamic Wave Propagation Using A Three-Stage Optimization Technique" by Suhas Suresh Bharadwaj and Reuben Thomas Thovelil.
 
-# A Unified Physics-Informed Neural Network for Modeling Electro- and Elastodynamic Wave Propagation Using 1D Piezoelectricity
+# A Unified Physics-Informed Neural Network for Modeling Coupled Electro‑ and Elastodynamic Wave Propagation Using A Three-Stage Optimization Technique
 
-This repository contains the implementation of a physics-informed neural network (PINN) for solving coupled one-dimensional linear piezoelectric systems. The code trains a neural network to simultaneously predict mechanical displacement and electric potential fields while satisfying elastodynamic and electrostatic governing equations.
+This repository contains the implementation of a physics-informed neural network (PINN) for solving coupled one-dimensional linear piezoelectric systems using a three-phase optimization technique to minimize total model losses. The code trains a neural network to simultaneously predict mechanical displacement and electric potential fields while satisfying elastodynamic and electrostatic governing equations.
 
 ## Overview
 
