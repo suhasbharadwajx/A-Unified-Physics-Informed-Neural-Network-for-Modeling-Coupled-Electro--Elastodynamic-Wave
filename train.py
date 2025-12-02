@@ -32,7 +32,7 @@ model = PiezoelectricPINN(
 ).to(device)
 
 if torch.cuda.device_count() > 1:
-    print(f"\n✓ Enabling DataParallel for {torch.cuda.device_count()} GPUs")
+    print(f"\nEnabling DataParallel for {torch.cuda.device_count()} GPUs")
     model = nn.DataParallel(model)
 
 total_params = sum(p.numel() for p in model.parameters())
@@ -76,7 +76,7 @@ def loss_fn():
     return L, (L_pde, L_bc, L_ic)
 
 # STAGE 1: Adam
-print("STAGE 1: ADAM (18k epochs, dual T4, published piezoelectric equations)")
+print("STAGE 1: ADAM (18k epochs, dual T4)")
 opt_adam = torch.optim.Adam(model.parameters(), lr=STAGE_1_ADAM['lr'], 
                            betas=(STAGE_1_ADAM['beta1'], STAGE_1_ADAM['beta2']))
 best_loss = float('inf')
@@ -99,14 +99,14 @@ for ep in trange(STAGE_1_ADAM['epochs']):
         print(f"Epoch {ep+1:5d}: L={L.item():.3e}, PDE={Lp.item():.3e}, BC={Lb.item():.3e}, IC={Li.item():.3e}")
     
     if patience_ctr >= STAGE_1_ADAM['patience']:
-        print(f"\n✓ Early stopping at epoch {ep+1}")
+        print(f"\nEarly stopping at epoch {ep+1}")
         break
 
 torch.cuda.empty_cache()
 gc.collect()
 
 # STAGE 2: AdamW
-print("\nSTAGE 2: ADAMW (12k epochs, L2 regularization)")
+print("\nSTAGE 2: ADAMW (12k epochs, Dual T4)")
 opt_adamw = torch.optim.AdamW(model.parameters(), lr=STAGE_2_ADAMW['lr'], 
                              weight_decay=STAGE_2_ADAMW['weight_decay'])
 best_loss = float('inf')
@@ -129,14 +129,14 @@ for ep in trange(STAGE_2_ADAMW['epochs']):
         print(f"Epoch {ep+1:5d}: L={L.item():.3e}, PDE={Lp.item():.3e}, BC={Lb.item():.3e}, IC={Li.item():.3e}")
     
     if patience_ctr >= STAGE_2_ADAMW['patience']:
-        print(f"\n✓ Early stopping at epoch {ep+1}")
+        print(f"\nEarly stopping at epoch {ep+1}")
         break
 
 torch.cuda.empty_cache()
 gc.collect()
 
 # STAGE 3: L-BFGS
-print("\nSTAGE 3: L-BFGS (600 iterations, machine precision)")
+print("\nSTAGE 3: L-BFGS (600 iterations)")
 opt_lbfgs = torch.optim.LBFGS(
     model.parameters(), lr=STAGE_3_LBFGS['lr'],
     max_iter=STAGE_3_LBFGS['max_iter'],
@@ -163,4 +163,4 @@ gc.collect()
 
 # Save model
 torch.save(model.state_dict(), 'results/pinn_model.pt')
-print("✓ Model saved to results/pinn_model.pt")
+print("Model saved to results/pinn_model.pt")
