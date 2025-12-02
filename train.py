@@ -154,7 +154,7 @@ def closure():
     L.backward()
     lbfgs_iter += 1
     if lbfgs_iter % 50 == 0:
-        print(f" L-BFGS iter {lbfgs_iter}: Loss={L.item():.6e}")
+        print(f"L-BFGS iter {lbfgs_iter}: Loss={L.item():.6e}")
     return L
 
 opt_lbfgs.step(closure)
