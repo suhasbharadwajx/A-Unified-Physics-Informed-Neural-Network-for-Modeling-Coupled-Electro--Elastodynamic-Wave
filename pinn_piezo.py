@@ -13,13 +13,6 @@ e_33 = MATERIAL_PARAMS['e_33']
 eps_S = MATERIAL_PARAMS['eps_S']
 
 class PiezoelectricPINN(nn.Module):
-    """
-    Physics-Informed Neural Network for 1D linear piezoelectricity.
-    
-    Learns displacement u(x,t) and electric potential φ(x,t) simultaneously
-    while satisfying elastodynamic and electrostatic equations.
-    """
-    
     def __init__(self, in_dim=2, out_dim=2, hidden=180, layers=8):
         super().__init__()
         modules = [nn.Linear(in_dim, hidden), nn.Tanh()]
@@ -35,15 +28,6 @@ class PiezoelectricPINN(nn.Module):
                 nn.init.zeros_(m.bias)
     
     def forward(self, x):
-        """
-        Forward pass with hard-constraint enforcement.
-        
-        Args:
-            x: Tensor of shape (N, 2) containing (x, t) coordinates
-        
-        Returns:
-            out: Tensor of shape (N, 2) containing (u, φ)
-        """
         x_coord = x[:, 0:1]
         t_coord = x[:, 1:2]
         raw_out = self.net(x)
@@ -66,7 +50,6 @@ class PiezoelectricPINN(nn.Module):
         return torch.cat([u, phi], dim=1)
 
 def grad(x, f):
-    """Compute gradient of f w.r.t. x using autograd."""
     return torch.autograd.grad(
         f, x, 
         grad_outputs=torch.ones_like(f),
@@ -76,11 +59,6 @@ def grad(x, f):
     )[0]
 
 def piezo_residual(x, model):
-    """
-    Compute residuals of the coupled piezoelectric equations.
-    
-    Returns tensor containing elastodynamic and electrical residuals.
-    """
     x = x.clone().detach().requires_grad_(True)
     out = model(x)
     u, phi = out[:, 0:1], out[:, 1:2]
